@@ -28,6 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $validation_error .= "Invalid email. <br>";
     }
+
+    $raw_birth_year = $_POST["birth_year"];
+    $options = ["options" => ["min_range" => 1900, "max_range" => date("Y")]];
+    if (filter_var($raw_birth_year, FILTER_VALIDATE_INT, $options)) {
+        $birth_year = $raw_birth_year;
+    } else {
+        $validation_error .= "This can't be your birth year. <br>";
+    }
 }
 ?>
 
