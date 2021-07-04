@@ -7,6 +7,15 @@ $birth_year = 1989;
 $validation_error = "";
 $existing_users = ["admin", "guest"];
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $raw_name = trim(htmlspecialchars($_POST["name"]));
+    if (in_array($raw_name, $existing_users)) {
+        $validation_error .= "This name is taken. <br>";
+    } else {
+        $name = $raw_name;
+    }
+}
+
 ?>
 
 <h1>Create your profile</h1>
