@@ -14,6 +14,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $name = $raw_name;
     }
+
+    $raw_character = $_POST["character"];
+    if (in_array($raw_character, ["wizard", "mage", "orc"])) {
+        $character = $raw_character;
+    } else {
+        $validation_error .= "You must pick a wizard, mage, or orc. <br>";
+    }
+
+    $raw_email = $_POST["email"];
+    if (filter_var($raw_email, FILTER_VALIDATE_EMAIL)) {
+        $email = $raw_email;
+    } else {
+        $validation_error .= "Invalid email. <br>";
+    }
+
+    $raw_birth_year = $_POST["birth_year"];
+    $options = ["options" => ["mini_range" => 1900, "max_range" => date("Y")]];
+    if (filter_var($raw_birth_year, FILTER_VALIDATE_INT, $options)) {
+        $birth_year = $raw_birth_year;
+    } else {
+        $validation_error .= "This can't be your birth year. <br>";
+    }
 }
 
 ?>
@@ -54,5 +76,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Email: <?= $email; ?>
 </p>
 <p>
-    Age: <?= $age; ?>
+    Age: <?= $birth_year; ?>
 </p>
