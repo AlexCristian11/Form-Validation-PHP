@@ -75,5 +75,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Email: <?= $email; ?>
 </p>
 <p>
-    Age: <?= $birth_year; ?>
+    Age: <?= date("Y") - $birth_year; ?>
 </p>
